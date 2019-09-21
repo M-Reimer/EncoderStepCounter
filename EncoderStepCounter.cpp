@@ -42,10 +42,10 @@ void EncoderStepCounter::begin() {
 }
 
 // Returns true if we entered a new half step (both pins are same value)
-bool EncoderStepCounter::CheckEncoderPos(int& aPosValue, EncDir& aDirection) {
+bool EncoderStepCounter::CheckEncoderPos(bool& aPosValue, EncDir& aDirection) {
   // Read current values
-  int pin1 = digitalRead(encoder_pin1);
-  int pin2 = digitalRead(encoder_pin2);
+  bool pin1 = digitalRead(encoder_pin1);
+  bool pin2 = digitalRead(encoder_pin2);
 
   // If nothing has changed, then exit
   if (pin1 == lastpin1 && pin2 == lastpin2)
@@ -75,16 +75,13 @@ bool EncoderStepCounter::CheckEncoderPos(int& aPosValue, EncDir& aDirection) {
 // Reads the pins and detects rotation
 void EncoderStepCounter::tick() {
   // Get actual position change
-  int posvalue;
+  bool posvalue;
   EncDir direction;
   if (!CheckEncoderPos(posvalue, direction)) return;
 
   // For half step encoders, each half step change counts
   if (encoder_type == HALF_STEP) {
-    if (direction == CW)
-      encoderpos++;
-    else
-      encoderpos--;
+    encoderpos += direction;
   }
 
   // For full step encoders, only the "one position" counts but we have to
@@ -95,10 +92,7 @@ void EncoderStepCounter::tick() {
       last_zero_dir = direction;
     else if (last_zero_dir == direction) {
       last_zero_dir = UNKNOWN_DIR;
-      if (direction == CW)
-        encoderpos++;
-      else
-        encoderpos--;
+      encoderpos += direction;
     }
   }
 }

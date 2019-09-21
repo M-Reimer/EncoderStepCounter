@@ -21,7 +21,7 @@
 
 #include "Arduino.h"
 
-enum EncoderType { HALF_STEP, FULL_STEP };
+enum EncoderType: unsigned char { HALF_STEP, FULL_STEP };
 
 class EncoderStepCounter {
 public:
@@ -40,12 +40,12 @@ private:
   EncoderType encoder_type;
 
   // Enum for the direction
-  enum EncDir { CW, CCW, UNKNOWN_DIR };
+  enum EncDir: signed char { CW = 1, CCW = -1, UNKNOWN_DIR = 0 };
 
   // Attributes to remember some values for the CheckEncoderPos() method
-  int lastpin1;
-  int lastpin2;
-  int lastfull;
+  bool lastpin1;
+  bool lastpin2;
+  bool lastfull;
 
   // Attributes to remember some values for the tick() method
   EncDir last_zero_dir;
@@ -54,7 +54,7 @@ private:
   signed volatile char encoderpos;
 
   // Helper to get current encoder position
-  bool CheckEncoderPos(int& aPosValue, EncDir& aDirection);
+  bool CheckEncoderPos(bool& aPosValue, EncDir& aDirection);
 };
 
 #endif

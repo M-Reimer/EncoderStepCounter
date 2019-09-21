@@ -1,19 +1,14 @@
 #include "EncoderStepCounter.h"
 
-// These are for my hardware which has bad interrupt settings
-// https://github.com/NicoHood/HoodLoader2/issues/67
-// For official Arduino boards, use the commented out lines
-// and only adapt the ENCODER_PINx values
+#define ENCODER_PIN1 2
+#define ENCODER_INT1 digitalPinToInterrupt(ENCODER_PIN1)
+#define ENCODER_PIN2 3
+#define ENCODER_INT2 digitalPinToInterrupt(ENCODER_PIN2)
 
-#define ENCODER_PIN1 14
-#define ENCODER_INT1 3
-//#define ENCODER_INT1 digitalPinToInterrupt(ENCODER_PIN1)
-#define ENCODER_PIN2 19
-#define ENCODER_INT2 6
-//#define ENCODER_INT2 digitalPinToInterrupt(ENCODER_PIN2)
-
-// Create instance for one half step encoder
+// Create instance for one full step encoder
 EncoderStepCounter encoder(ENCODER_PIN1, ENCODER_PIN2);
+// Use the following for half step encoders
+//EncoderStepCounter encoder(ENCODER_PIN1, ENCODER_PIN2, HALF_STEP);
 
 void setup() {
   Serial.begin(9600);

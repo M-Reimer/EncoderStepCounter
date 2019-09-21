@@ -1,11 +1,12 @@
 #include "EncoderStepCounter.h"
 
+#define ENCODER_PIN1 2
+#define ENCODER_PIN2 3
 
-#define ENCODER_PIN1 14
-#define ENCODER_PIN2 19
-
-// Create instance for one half step encoder
-EncoderStepCounter encoder(ENCODER_PIN1, ENCODER_PIN2, HALF_STEP);
+// Create instance for one full step encoder
+EncoderStepCounter encoder(ENCODER_PIN1, ENCODER_PIN2);
+// Use the following for half step encoders
+//EncoderStepCounter encoder(ENCODER_PIN1, ENCODER_PIN2, HALF_STEP);
 
 void setup() {
   Serial.begin(9600);

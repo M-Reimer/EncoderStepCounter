@@ -94,7 +94,6 @@ void EncoderStepCounter::tick() {
 
   // For full step encoders, only the "one position" counts but we have to
   // check the "zero position" also for reliability.
-  // Same inverted for FULL_STEP_INVERTED encoders.
   else {
     if (posvalue == 0)
       last_zero_dir = direction;

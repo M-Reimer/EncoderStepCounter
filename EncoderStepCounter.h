@@ -26,11 +26,12 @@ enum EncoderType: unsigned char { HALF_STEP, FULL_STEP };
 class EncoderStepCounter {
 public:
   EncoderStepCounter(int aPin1, int aPin2, EncoderType aEncType = FULL_STEP);
-  signed char getPosition();
+  signed char getPosition() const;
   void setPosition(signed char aPosition);
   void reset();
   void tick();
-  void begin();
+  virtual void begin();
+  void begin(EncoderType aEncType);
 private:
   // Arduino pins for polling
   int encoder_pin1;

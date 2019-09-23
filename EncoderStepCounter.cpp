@@ -30,6 +30,14 @@ EncoderStepCounter::EncoderStepCounter(int aPin1, int aPin2, EncoderType aEncTyp
 {
 }
 
+// This one is meant to be used for derived libraries.
+// You set the defalt encoder type in your initialization list.
+// The user is able to override with the begin() call in the setup() routine.
+void EncoderStepCounter::begin(EncoderType aEncType) {
+  encoder_type = aEncType;
+  begin();
+}
+
 // Does all the initialization
 // Has to be called in setup()
 void EncoderStepCounter::begin() {
@@ -98,7 +106,7 @@ void EncoderStepCounter::tick() {
 }
 
 // Getter and Setter
-signed char EncoderStepCounter::getPosition() {
+signed char EncoderStepCounter::getPosition() const {
   return encoderpos;
 }
 void EncoderStepCounter::setPosition(signed char aPosition) {

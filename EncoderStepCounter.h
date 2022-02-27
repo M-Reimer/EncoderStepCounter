@@ -26,7 +26,7 @@ enum EncoderType: unsigned char { HALF_STEP, FULL_STEP };
 class EncoderStepCounter {
 public:
   EncoderStepCounter(int aPin1, int aPin2, EncoderType aEncType = FULL_STEP);
-  signed char getPosition() const;
+  signed int getPosition() const;
   void setPosition(signed char aPosition);
   void reset();
   void tick();
@@ -52,7 +52,7 @@ private:
   EncDir last_zero_dir;
 
   // Attribute for current position
-  signed volatile char encoderpos;
+  signed volatile int encoderpos;
 
   // Helper to get current encoder position
   bool CheckEncoderPos(bool& aPosValue, EncDir& aDirection);

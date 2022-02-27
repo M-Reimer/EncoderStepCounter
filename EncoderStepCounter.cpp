@@ -105,7 +105,7 @@ void EncoderStepCounter::tick() {
 }
 
 // Getter and Setter
-signed char EncoderStepCounter::getPosition() const {
+signed int EncoderStepCounter::getPosition() const {
   return encoderpos;
 }
 void EncoderStepCounter::setPosition(signed char aPosition) {
